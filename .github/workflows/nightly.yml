@@ -1,22 +1,126 @@
-# Secondary CI (Jenkins is primary). Full regression nightly on develop.
+# Nightly full regression on main (09:00 UTC = 02:00 America/Phoenix) + manual runs.
+# Publishes the Allure report to GitHub Pages with history kept across runs; the report is always an artifact too.
 name: nightly
 on:
-  schedule: [{ cron: '0 9 * * *' }] # 02:00 America/Phoenix
+  schedule:
+    - cron: '0 9 * * *'
   workflow_dispatch:
+    inputs:
+      target:
+        description: Playwright project
+        type: choice
+        options: [all, mock-bank, petstore, toolshop, countries]
+        default: all
+      grep:
+        description: Tag filter, e.g. @smoke or @api:ReadAccounts\.v1 (empty = everything)
+        type: string
+        default: ''
+      shards:
+        description: Parallel shards (1 = off)
+        type: number
+        default: 1
+      publish:
+        description: Publish to GitHub Pages
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nightly-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
-  regression:
-    runs-on: ubuntu-latest
-    timeout-minutes: 90
+  args:
+    runs-on: ${{ fromJSON(vars.CI_RUNS_ON || '"ubuntu-latest"') }}
+    timeout-minutes: 1
+    outputs:
+      v: ${{ steps.a.outputs.v }}
     steps:
-      - uses: actions/checkout@v4
-        with: { ref: develop }
-      - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: npm }
+      - id: a
+        env: { TARGET: '${{ inputs.target }}', GREP: '${{ inputs.grep }}' }
+        run: |
+          v=""
+          [ -n "$TARGET" ] && [ "$TARGET" != all ] && v="--project=$TARGET"
+          [ -n "$GREP" ] && v="$v --grep $GREP"
+          echo "v=$v" >> "$GITHUB_OUTPUT"
+
+  tests:
+    needs: args
+    uses: ./.github/workflows/api-tests.yml
+    with:
+      playwright-args: ${{ needs.args.outputs.v }}
+      static-checks: false
+      shards: ${{ inputs.shards || 1 }}
+      test-env: ${{ vars.NIGHTLY_TEST_ENV || 'local' }}
+      environment: ${{ vars.NIGHTLY_ENVIRONMENT || 'ci' }}
+      artifact-prefix: nightly
+    secrets: inherit
+
+  report:
+    needs: tests
+    if: always() && needs.tests.result != 'skipped'
+    runs-on: ${{ fromJSON(vars.CI_RUNS_ON || '"ubuntu-latest"') }}
+    timeout-minutes: 10
+    outputs:
+      pages: ${{ steps.p.outputs.enabled }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with: { node-version: 24, cache: npm }
       - run: npm ci
-      - run: npx playwright test
-        env: { CI: 'true' }
-      - run: node tools/allure-meta.ts && npx allure generate allure-results -o allure-report
-        if: always()
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with: { name: allure-report, path: allure-report/ }
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with: { name: '${{ needs.tests.outputs.results-artifact }}', path: allure-results }
+      - name: Pages URL (empty if Pages is off or unavailable, e.g. on some GHE servers)
+        id: p
+        env: { GH_TOKEN: '${{ github.token }}' }
+        run: |
+          url=$(gh api "repos/${{ github.repository }}/pages" --jq .html_url 2>/dev/null || true)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          [ -n "$url" ] && echo "enabled=true" >> "$GITHUB_OUTPUT" || echo "enabled=false" >> "$GITHUB_OUTPUT"
+      - name: Restore Allure history from the last published report
+        run: |
+          mkdir -p allure-history
+          if [ -n "${{ steps.p.outputs.url }}" ]; then
+            curl -fsSL "${{ steps.p.outputs.url }}history/history.jsonl" -o allure-history/history.jsonl \
+              && echo "history: $(wc -l < allure-history/history.jsonl) previous run(s)" || echo "no previous history"
+          fi
+      - name: Generate report
+        env:
+          ALLURE_HISTORY_PATH: allure-history/history.jsonl
+          ALLURE_REPORT_URL: ${{ steps.p.outputs.url }}
+        run: |
+          node tools/allure-meta.ts
+          npx allure generate allure-results -o allure-report
+          mkdir -p allure-report/history
+          [ -f allure-history/history.jsonl ] && cp allure-history/history.jsonl allure-report/history/
+          touch allure-report/.nojekyll
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with: { name: allure-report, path: allure-report/, retention-days: 30 }
+      - if: steps.p.outputs.enabled == 'true' && (github.event_name == 'schedule' || inputs.publish)
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with: { path: allure-report/ }
+      - name: Summary
+        run: |
+          node tools/ci-summary.ts allure-results "nightly" >> "$GITHUB_STEP_SUMMARY"
+          [ -n "${{ steps.p.outputs.url }}" ] && echo "Allure report: ${{ steps.p.outputs.url }}" >> "$GITHUB_STEP_SUMMARY" \
+            || echo "Allure report: download the \`allure-report\` artifact (Pages not enabled)" >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    needs: report
+    if: always() && needs.report.outputs.pages == 'true' && (github.event_name == 'schedule' || inputs.publish)
+    runs-on: ${{ fromJSON(vars.CI_RUNS_ON || '"ubuntu-latest"') }}
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.d.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - id: d
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

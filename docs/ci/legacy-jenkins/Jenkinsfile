@@ -1,4 +1,4 @@
-// Primary CI. Assumes a Node 22 agent label and Jenkins credentials named below (IDs are placeholders).
+// LEGACY (reference only): GitHub Actions is the primary CI (.github/workflows, docs/ci.md). Kept for teams still on Jenkins.
 pipeline {
   agent { label 'node22' }
   options { timeout(time: 90, unit: 'MINUTES'); timestamps(); disableConcurrentBuilds() }
