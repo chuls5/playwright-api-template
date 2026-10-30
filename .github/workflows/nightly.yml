@@ -52,7 +52,7 @@ jobs:
     with:
       playwright-args: ${{ needs.args.outputs.v }}
       static-checks: false
-      shards: ${{ inputs.shards || 1 }}
+      shards: ${{ fromJSON(format('{0}', inputs.shards || 1)) }} # dispatch inputs arrive as strings
       test-env: ${{ vars.NIGHTLY_TEST_ENV || 'local' }}
       environment: ${{ vars.NIGHTLY_ENVIRONMENT || 'ci' }}
       artifact-prefix: nightly
