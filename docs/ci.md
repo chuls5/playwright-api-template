@@ -19,6 +19,8 @@ GitHub Actions is the primary CI (github.com or GitHub Enterprise). The Jenkinsf
 - **Budgets**: test job 60 min, static 10 min. PR runs cancel superseded runs (`concurrency`); nightly runs queue.
 - **Retries**: `retries: 1` on CI (`playwright.config.ts`). A test that passes on retry shows as flaky in Allure.
   A public demo API outage is the Environment category, not a product defect; rerun the failed jobs once and note it.
+  Known: the public petstore's shared `/store/inventory` can report negative counts (other users' orders); the test
+  records it as an `env` annotation instead of failing.
 - **Security**: workflow `permissions: contents: read`; only `deploy` gets `pages: write` + `id-token: write`.
   Actions are pinned to commit SHAs (version in the trailing comment). Update them deliberately, e.g. with Dependabot.
 
