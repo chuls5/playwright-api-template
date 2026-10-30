@@ -1,0 +1,155 @@
+# Reusable test job: static checks (optional) → Playwright (optionally sharded) → merged Allure results + job summary.
+# Called by pr.yml and nightly.yml, and by service repos as a shift-left gate (docs/ci/reusable-workflow.md).
+name: api-tests
+on:
+  workflow_call:
+    inputs:
+      playwright-args:
+        description: Extra args for `playwright test`, e.g. `--grep @smoke` or `--project=petstore`
+        type: string
+        default: ''
+      static-checks:
+        description: Run lint, typecheck and prettier before tests
+        type: boolean
+        default: true
+      shards:
+        description: Number of shards (1 = no sharding). Each shard is a parallel job; results are merged.
+        type: number
+        default: 1
+      test-env:
+        description: TEST_ENV value (loads .env.<TEST_ENV> keys; see .env.example)
+        type: string
+        default: local
+      environment:
+        description: GitHub environment that holds this run's secrets
+        type: string
+        default: ci
+      runs-on:
+        description: Runner labels as JSON (string or array). Defaults to repo variable CI_RUNS_ON, then ubuntu-latest.
+        type: string
+        default: ''
+      tests-repository:
+        description: Repo with the tests (set when called from a service repo). Empty = the calling repo.
+        type: string
+        default: ''
+      tests-ref:
+        description: Ref of tests-repository to check out. Empty = the triggering ref.
+        type: string
+        default: ''
+      artifact-prefix:
+        type: string
+        default: allure
+    secrets:
+      CA_BUNDLE:
+        description: Optional PEM bundle for a corporate TLS proxy / private CA (sets NODE_EXTRA_CA_CERTS)
+        required: false
+    outputs:
+      results-artifact:
+        description: Name of the merged allure-results artifact
+        value: ${{ jobs.merge.outputs.artifact }}
+
+permissions:
+  contents: read
+
+env:
+  CI: 'true'
+  FORCE_COLOR: '1'
+
+jobs:
+  static:
+    if: inputs.static-checks
+    runs-on: ${{ fromJSON(inputs.runs-on || vars.CI_RUNS_ON || '"ubuntu-latest"') }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { repository: '${{ inputs.tests-repository }}', ref: '${{ inputs.tests-ref }}' }
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with: { node-version: 24, cache: npm }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run format:check
+
+  plan:
+    runs-on: ${{ fromJSON(inputs.runs-on || vars.CI_RUNS_ON || '"ubuntu-latest"') }}
+    timeout-minutes: 2
+    outputs:
+      shards: ${{ steps.m.outputs.shards }}
+    steps:
+      - id: m
+        run: echo "shards=$(seq -s, 1 '${{ inputs.shards }}' | sed 's/^/[/;s/$/]/')" >> "$GITHUB_OUTPUT"
+
+  test:
+    needs: plan
+    runs-on: ${{ fromJSON(inputs.runs-on || vars.CI_RUNS_ON || '"ubuntu-latest"') }}
+    environment: ${{ inputs.environment }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.plan.outputs.shards) }}
+    env:
+      TEST_ENV: ${{ inputs.test-env }}
+      RUN_ID: gha-${{ github.run_id }}-${{ github.run_attempt }}
+      GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
+      GIT_COMMIT: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { repository: '${{ inputs.tests-repository }}', ref: '${{ inputs.tests-ref }}' }
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with: { node-version: 24, cache: npm }
+      - name: Trust corporate CA (only if CA_BUNDLE is set)
+        env: { CA_BUNDLE: '${{ secrets.CA_BUNDLE }}' }
+        run: |
+          if [ -n "$CA_BUNDLE" ]; then
+            printf '%s\n' "$CA_BUNDLE" > "$RUNNER_TEMP/ca.pem"
+            echo "NODE_EXTRA_CA_CERTS=$RUNNER_TEMP/ca.pem" >> "$GITHUB_ENV"
+            echo "NODE_EXTRA_CA_CERTS set"
+          fi
+      - run: npm ci
+      - name: playwright test
+        run: |
+          shard=""
+          if [ "$SHARDS" -gt 1 ]; then shard="--shard=$SHARD_INDEX/$SHARDS"; fi
+          # shellcheck disable=SC2086 # PW_ARGS is a list of args
+          npx playwright test $PW_ARGS $shard
+        env:
+          PW_ARGS: ${{ inputs.playwright-args }}
+          SHARDS: ${{ inputs.shards }}
+          SHARD_INDEX: ${{ matrix.shard }}
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: ${{ inputs.artifact-prefix }}-shard-${{ matrix.shard }}
+          path: |
+            allure-results/
+            playwright-report/
+            test-results/junit.xml
+          retention-days: 14
+
+  merge:
+    needs: test
+    if: always() && needs.test.result != 'skipped'
+    runs-on: ${{ fromJSON(inputs.runs-on || vars.CI_RUNS_ON || '"ubuntu-latest"') }}
+    timeout-minutes: 5
+    outputs:
+      artifact: ${{ inputs.artifact-prefix }}-results
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { repository: '${{ inputs.tests-repository }}', ref: '${{ inputs.tests-ref }}', sparse-checkout: tools }
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with: { node-version: 24 }
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with: { pattern: '${{ inputs.artifact-prefix }}-shard-*', path: shards }
+      - name: Merge allure-results
+        run: |
+          mkdir -p allure-results
+          for d in shards/*/allure-results; do [ -d "$d" ] && cp -r "$d"/. allure-results/; done
+          find allure-results -name '*-result.json' | wc -l
+      - name: Job summary
+        run: node tools/ci-summary.ts allure-results "api-tests (${{ inputs.playwright-args || 'all' }})" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ${{ inputs.artifact-prefix }}-results
+          path: allure-results/
+          retention-days: 30

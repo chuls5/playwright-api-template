@@ -1,33 +1,56 @@
-# Secondary CI (Jenkins is primary). Configured, not yet exercised on a real remote.
+# Primary CI for pull requests: static checks + impact-selected tests (or @smoke). Required check: "pr / gate".
 name: pr
 on:
   pull_request:
     branches: [develop, main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
-  check:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
+  select:
+    runs-on: ${{ fromJSON(vars.CI_RUNS_ON || '"ubuntu-latest"') }}
+    timeout-minutes: 5
+    outputs:
+      args: ${{ steps.s.outputs.args }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: npm }
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run typecheck
-      - run: npx playwright test --grep @smoke
-        env: { CI: 'true' }
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: results
-          path: |
-            allure-results/
-            test-results/
-            playwright-report/
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { fetch-depth: 0 }
+      - id: s
+        run: |
+          args=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" | node tools/ci-impact.ts)
+          echo "args=$args" >> "$GITHUB_OUTPUT"
+          echo "Selected: \`$args\`" >> "$GITHUB_STEP_SUMMARY"
+
+  tests:
+    needs: select
+    uses: ./.github/workflows/api-tests.yml
+    with:
+      playwright-args: ${{ needs.select.outputs.args }}
+      artifact-prefix: pr-${{ github.event.pull_request.number }}
+    secrets: inherit
+
   main-only-from-develop:
     if: github.base_ref == 'main'
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON(vars.CI_RUNS_ON || '"ubuntu-latest"') }}
+    timeout-minutes: 1
     steps:
-      - run: |
-          case "${{ github.head_ref }}" in develop|release/*|hotfix/*) exit 0;; esac
+      - env: { HEAD_REF: '${{ github.head_ref }}' }
+        run: |
+          case "$HEAD_REF" in develop|release/*|hotfix/*) exit 0;; esac
           echo "main accepts PRs only from develop, release/* or hotfix/*"; exit 1
+
+  # Single stable name for branch protection, whatever runs above.
+  gate:
+    needs: [select, tests, main-only-from-develop]
+    if: always()
+    runs-on: ${{ fromJSON(vars.CI_RUNS_ON || '"ubuntu-latest"') }}
+    timeout-minutes: 1
+    steps:
+      - if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        run: echo "a required job failed or was cancelled"; exit 1
+      - run: echo "all required jobs passed or were skipped"
