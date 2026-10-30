@@ -1,0 +1,898 @@
+{
+  "target": "toolshop",
+  "ops": 81,
+  "coveredL1plus": 20,
+  "rows": [
+    {
+      "op": "getBrands",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "storeBrand",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getBrand",
+      "levels": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "max": 2
+    },
+    {
+      "op": "updateBrand",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "deleteBrand",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "patchBrand",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "searchBrand",
+      "levels": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "max": 2
+    },
+    {
+      "op": "createCart",
+      "levels": [
+        0,
+        1,
+        0,
+        1,
+        1
+      ],
+      "max": 4
+    },
+    {
+      "op": "addItem",
+      "levels": [
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "max": 4
+    },
+    {
+      "op": "getCart",
+      "levels": [
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "max": 3
+    },
+    {
+      "op": "deleteCart",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "updateCartQuantity",
+      "levels": [
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "max": 3
+    },
+    {
+      "op": "deleteProductFromCart",
+      "levels": [
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "max": 3
+    },
+    {
+      "op": "getCategoriesTree",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getCategories",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "storeCategory",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getCategory",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "searchCategory",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "updateCategory",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "deleteCategory",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "patchCategory",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getMessages",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "sendMessage",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "attachFile",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getMessage",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "replyToMessage",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "updateMessageStatus",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getFavorites",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "storeFavorite",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getFavorite",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "deleteFavorite",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getImages",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getInvoices",
+      "levels": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "max": 4
+    },
+    {
+      "op": "storeInvoice",
+      "levels": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "max": 4
+    },
+    {
+      "op": "storeGuestInvoice",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getInvoice",
+      "levels": [
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "max": 4
+    },
+    {
+      "op": "updateInvoice",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "patchInvoice",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "downloadPDF",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "downloadPDFStatus",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "updateInvoiceStatus",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "searchInvoice",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "checkPayment",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "postcodeLookup",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "max": 4
+    },
+    {
+      "op": "getProducts",
+      "levels": [
+        0,
+        1,
+        1,
+        0,
+        1
+      ],
+      "max": 4
+    },
+    {
+      "op": "storeProduct",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getProduct",
+      "levels": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "max": 2
+    },
+    {
+      "op": "updateProduct",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "deleteProduct",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "patchProduct",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getRelatedProducts",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "searchProduct",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "getProductSpecs",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "storeProductSpec",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getProductSpec",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "updateProductSpec",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "deleteProductSpec",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getSpecNames",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getTotalSalesPerCountry",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getTopPurchasedProducts",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getBestSellingCategories",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getTotalSalesOfYears",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getAverageSalesPerMonth",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getAverageSalesPerWeek",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getCustomersByCountry",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "salesStream",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "setupTotp",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "verifyTotp",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getUsers",
+      "levels": [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "max": 2
+    },
+    {
+      "op": "storeUser",
+      "levels": [
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "max": 4
+    },
+    {
+      "op": "login-customer",
+      "levels": [
+        3,
+        0,
+        0,
+        0,
+        1
+      ],
+      "max": 4
+    },
+    {
+      "op": "forgotPassword",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "changePassword",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "get-current-customer-info",
+      "levels": [
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": 0
+    },
+    {
+      "op": "logOut",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "refreshToken",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getUser",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "updateUser",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "deleteUser",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "patchUser",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "searchUser",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    }
+  ]
+}

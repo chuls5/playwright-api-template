@@ -1,0 +1,33 @@
+// W4 chain (L3) / journey (L4). Copy to targets/<t>/tests/L3-chain/<name>.L3.spec.ts (or L4-journey/*.L4.spec.ts).
+// Rules: no HTTP code here (client methods + fixtures only); entities come from fixtures so cleanup is registered;
+// each step returns what the next step needs; data the server derives (lookups, prices) is read, never hard-coded.
+import { expectSchema, expectStatus } from '../../../../src';
+import { expect, test } from '../../fixtures';
+import { __Schema1__ } from '../../schemas';
+
+test(
+  '__flow__: __op1__ → __op2__ → __op3__ keeps __invariant__',
+  { tag: ['@L3', '@api:__op1__', '@api:__op2__', '@api:__op3__'] },
+  async ({ __client__, __entityFactory__ }) => {
+    const created = await test.step('__op1__', async () => {
+      const entity = await __entityFactory__(); // fixture: creates + registers cleanup
+      return entity;
+    });
+
+    const out = await test.step('__op2__ consumes __op1__ output', async () => {
+      const res = await __client__.__op2__(created.id);
+      expectStatus(res, 200);
+      return expectSchema(res, __Schema1__);
+    });
+
+    await test.step('__op3__ reflects __op2__', async () => {
+      const res = await __client__.__op3__(created.id);
+      expectStatus(res, 200);
+      expect(res.body).toMatchObject({ id: out.id });
+    });
+
+    await test.step('invariant: __invariant__', async () => {
+      // e.g. total == Σ price × qty; sum of balances unchanged; entity visible through the read API.
+    });
+  },
+);

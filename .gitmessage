@@ -1,0 +1,7 @@
+# type(scope): subject  (≤100 chars, imperative)
+# types: feat fix test docs refactor chore ci build perf style revert
+# scope: core | auth | client | data | mock | petstore | mock-bank | agents | skills | docs | ci
+#
+# Why (not what):
+#
+# Refs: JIRA-123

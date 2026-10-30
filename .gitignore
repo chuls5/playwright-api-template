@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.auth/
+allure-results/
+allure-report/
+test-results/
+playwright-report/
+ledger/
+*.log
+.DS_Store

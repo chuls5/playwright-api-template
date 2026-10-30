@@ -1,0 +1,22 @@
+# Secondary CI (Jenkins is primary). Full regression nightly on develop.
+name: nightly
+on:
+  schedule: [{ cron: '0 9 * * *' }] # 02:00 America/Phoenix
+  workflow_dispatch:
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: develop }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx playwright test
+        env: { CI: 'true' }
+      - run: node tools/allure-meta.ts && npx allure generate allure-results -o allure-report
+        if: always()
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: allure-report, path: allure-report/ }

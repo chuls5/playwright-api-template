@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+# Blocks direct pushes to main/develop and runs the same gate as PR CI.
+set -e
+while read -r _ _ remote_ref _; do
+  case "$remote_ref" in refs/heads/main|refs/heads/develop)
+    echo "pre-push: direct push to ${remote_ref#refs/heads/} is not allowed; open a PR." >&2; exit 1;;
+  esac
+done
+npm run lint --silent
+npm run typecheck --silent
+npx playwright test --grep @smoke --project=mock-bank --reporter=line

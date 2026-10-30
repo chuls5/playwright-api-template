@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Environment / infra",
+    "description": "Target unavailable, hanging or reset (5xx, network, request still pending at test timeout, shared-demo DB reset). Not a product verdict; rerun when the target is healthy.",
+    "matchedStatuses": ["failed", "broken"],
+    "messageRegex": "[\\s\\S]*(env-unavailable|HTTP 5\\d\\d|Something went wrong|selected product id is invalid|ECONNREFUSED|ECONNRESET|ETIMEDOUT|ENOTFOUND|EAI_AGAIN|socket hang up|Request context disposed)[\\s\\S]*"
+  },
+  {
+    "name": "Test defect",
+    "description": "Bug in the test code, fixture or data setup (setup: failures, JS errors, timeouts).",
+    "matchedStatuses": ["failed", "broken"],
+    "messageRegex": "[\\s\\S]*(setup: |TypeError|ReferenceError|SyntaxError|is not a function|Cannot read properties|Test timeout|Timeout \\d+ms exceeded|fixture)[\\s\\S]*"
+  },
+  {
+    "name": "Product defect",
+    "description": "Assertion failed against a healthy target: wrong status, body or schema.",
+    "matchedStatuses": ["failed"]
+  }
+]

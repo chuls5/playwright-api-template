@@ -1,0 +1,1899 @@
+{
+  "target": "toolshop",
+  "generatedBy": "tools/discover.ts",
+  "ops": [
+    {
+      "id": "getBrands",
+      "method": "GET",
+      "path": "/brands",
+      "tags": [
+        "Brand"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "storeBrand",
+      "method": "POST",
+      "path": "/brands",
+      "tags": [
+        "Brand"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "201",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "getBrand",
+      "method": "GET",
+      "path": "/brands/{brandId}",
+      "tags": [
+        "Brand"
+      ],
+      "security": [],
+      "params": [
+        "path:brandId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "updateBrand",
+      "method": "PUT",
+      "path": "/brands/{brandId}",
+      "tags": [
+        "Brand"
+      ],
+      "security": [],
+      "params": [
+        "path:brandId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "deleteBrand",
+      "method": "DELETE",
+      "path": "/brands/{brandId}",
+      "tags": [
+        "Brand"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:brandId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "204",
+        "401",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "patchBrand",
+      "method": "PATCH",
+      "path": "/brands/{brandId}",
+      "tags": [
+        "Brand"
+      ],
+      "security": [],
+      "params": [
+        "path:brandId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "searchBrand",
+      "method": "GET",
+      "path": "/brands/search",
+      "tags": [
+        "Brand"
+      ],
+      "security": [],
+      "params": [
+        "query:q"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "createCart",
+      "method": "POST",
+      "path": "/carts",
+      "tags": [
+        "Cart"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "201",
+        "404",
+        "405",
+        "422"
+      ]
+    },
+    {
+      "id": "addItem",
+      "method": "POST",
+      "path": "/carts/{id}",
+      "tags": [
+        "Cart"
+      ],
+      "security": [],
+      "params": [
+        "path:id"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "404",
+        "405",
+        "422"
+      ]
+    },
+    {
+      "id": "getCart",
+      "method": "GET",
+      "path": "/carts/{cartId}",
+      "tags": [
+        "Cart"
+      ],
+      "security": [],
+      "params": [
+        "path:cartId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "deleteCart",
+      "method": "DELETE",
+      "path": "/carts/{cartId}",
+      "tags": [
+        "Cart"
+      ],
+      "security": [],
+      "params": [
+        "path:cartId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "204",
+        "401",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "updateCartQuantity",
+      "method": "PUT",
+      "path": "/carts/{cartId}/product/quantity",
+      "tags": [
+        "Cart"
+      ],
+      "security": [],
+      "params": [
+        "path:cartId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "404",
+        "405",
+        "422"
+      ]
+    },
+    {
+      "id": "deleteProductFromCart",
+      "method": "DELETE",
+      "path": "/carts/{cartId}/product/{productId}",
+      "tags": [
+        "Cart"
+      ],
+      "security": [],
+      "params": [
+        "path:cartId",
+        "path:productId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "204",
+        "401",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "getCategoriesTree",
+      "method": "GET",
+      "path": "/categories/tree",
+      "tags": [
+        "Category"
+      ],
+      "security": [],
+      "params": [
+        "query:by_category_slug"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "getCategories",
+      "method": "GET",
+      "path": "/categories",
+      "tags": [
+        "Category"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "storeCategory",
+      "method": "POST",
+      "path": "/categories",
+      "tags": [
+        "Category"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "201",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "getCategory",
+      "method": "GET",
+      "path": "/categories/tree/{categoryId}",
+      "tags": [
+        "Category"
+      ],
+      "security": [],
+      "params": [
+        "path:categoryId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "searchCategory",
+      "method": "GET",
+      "path": "/categories/search",
+      "tags": [
+        "Category"
+      ],
+      "security": [],
+      "params": [
+        "query:q"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "updateCategory",
+      "method": "PUT",
+      "path": "/categories/{categoryId}",
+      "tags": [
+        "Category"
+      ],
+      "security": [],
+      "params": [
+        "path:categoryId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "deleteCategory",
+      "method": "DELETE",
+      "path": "/categories/{categoryId}",
+      "tags": [
+        "Category"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:categoryId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "204",
+        "401",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "patchCategory",
+      "method": "PATCH",
+      "path": "/categories/{categoryId}",
+      "tags": [
+        "Category"
+      ],
+      "security": [],
+      "params": [
+        "path:categoryId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "getMessages",
+      "method": "GET",
+      "path": "/messages",
+      "tags": [
+        "Contact"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "query:page"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "sendMessage",
+      "method": "POST",
+      "path": "/messages",
+      "tags": [
+        "Contact"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "attachFile",
+      "method": "POST",
+      "path": "/messages/{messageId}/attach-file",
+      "tags": [
+        "Contact"
+      ],
+      "security": [],
+      "params": [
+        "path:messageId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "getMessage",
+      "method": "GET",
+      "path": "/messages/{messageId}",
+      "tags": [
+        "Contact"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:messageId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "replyToMessage",
+      "method": "POST",
+      "path": "/messages/{messageId}/reply",
+      "tags": [
+        "Contact"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:messageId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "updateMessageStatus",
+      "method": "PUT",
+      "path": "/messages/{messageId}/status",
+      "tags": [
+        "Contact"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:messageId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "getFavorites",
+      "method": "GET",
+      "path": "/favorites",
+      "tags": [
+        "Favorite"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "storeFavorite",
+      "method": "POST",
+      "path": "/favorites",
+      "tags": [
+        "Favorite"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "getFavorite",
+      "method": "GET",
+      "path": "/favorites/{favoriteId}",
+      "tags": [
+        "Favorite"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:favoriteId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "deleteFavorite",
+      "method": "DELETE",
+      "path": "/favorites/{favoriteId}",
+      "tags": [
+        "Favorite"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:favoriteId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "204",
+        "401",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "getImages",
+      "method": "GET",
+      "path": "/images",
+      "tags": [
+        "Image"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "getInvoices",
+      "method": "GET",
+      "path": "/invoices",
+      "tags": [
+        "Invoice"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "query:page"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "storeInvoice",
+      "method": "POST",
+      "path": "/invoices",
+      "tags": [
+        "Invoice"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405",
+        "422"
+      ]
+    },
+    {
+      "id": "storeGuestInvoice",
+      "method": "POST",
+      "path": "/invoices/guest",
+      "tags": [
+        "Invoice"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "422"
+      ]
+    },
+    {
+      "id": "getInvoice",
+      "method": "GET",
+      "path": "/invoices/{invoiceId}",
+      "tags": [
+        "Invoice"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:invoiceId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "updateInvoice",
+      "method": "PUT",
+      "path": "/invoices/{invoiceId}",
+      "tags": [
+        "Invoice"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:invoiceId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405",
+        "422"
+      ]
+    },
+    {
+      "id": "patchInvoice",
+      "method": "PATCH",
+      "path": "/invoices/{invoiceId}",
+      "tags": [
+        "Invoice"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:invoiceId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405",
+        "422"
+      ]
+    },
+    {
+      "id": "downloadPDF",
+      "method": "GET",
+      "path": "/invoices/{invoice_number}/download-pdf",
+      "tags": [
+        "Invoice"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:invoice_number"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "downloadPDFStatus",
+      "method": "GET",
+      "path": "/invoices/{invoice_number}/download-pdf-status",
+      "tags": [
+        "Invoice"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:invoice_number"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "updateInvoiceStatus",
+      "method": "PUT",
+      "path": "/invoices/{invoiceId}/status",
+      "tags": [
+        "Invoice"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:invoiceId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405",
+        "422"
+      ]
+    },
+    {
+      "id": "searchInvoice",
+      "method": "GET",
+      "path": "/invoices/search",
+      "tags": [
+        "Invoice"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "query:q",
+        "query:page"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "checkPayment",
+      "method": "POST",
+      "path": "/payment/check",
+      "tags": [
+        "Payment"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200"
+      ]
+    },
+    {
+      "id": "postcodeLookup",
+      "method": "GET",
+      "path": "/postcode-lookup",
+      "tags": [
+        "Postcode"
+      ],
+      "security": [],
+      "params": [
+        "query:country",
+        "query:postcode",
+        "query:house_number"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "422",
+        "502"
+      ]
+    },
+    {
+      "id": "getProducts",
+      "method": "GET",
+      "path": "/products",
+      "tags": [
+        "Product"
+      ],
+      "security": [],
+      "params": [
+        "query:by_brand",
+        "query:by_category",
+        "query:is_rental",
+        "query:between",
+        "query:sort",
+        "query:page"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "storeProduct",
+      "method": "POST",
+      "path": "/products",
+      "tags": [
+        "Product"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "404",
+        "405",
+        "422"
+      ]
+    },
+    {
+      "id": "getProduct",
+      "method": "GET",
+      "path": "/products/{productId}",
+      "tags": [
+        "Product"
+      ],
+      "security": [],
+      "params": [
+        "path:productId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "updateProduct",
+      "method": "PUT",
+      "path": "/products/{productId}",
+      "tags": [
+        "Product"
+      ],
+      "security": [],
+      "params": [
+        "path:productId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "404",
+        "405",
+        "422"
+      ]
+    },
+    {
+      "id": "deleteProduct",
+      "method": "DELETE",
+      "path": "/products/{productId}",
+      "tags": [
+        "Product"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:productId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "204",
+        "401",
+        "404",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "patchProduct",
+      "method": "PATCH",
+      "path": "/products/{productId}",
+      "tags": [
+        "Product"
+      ],
+      "security": [],
+      "params": [
+        "path:productId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "404",
+        "405",
+        "422"
+      ]
+    },
+    {
+      "id": "getRelatedProducts",
+      "method": "GET",
+      "path": "/products/{productId}/related",
+      "tags": [
+        "Product"
+      ],
+      "security": [],
+      "params": [
+        "path:productId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "searchProduct",
+      "method": "GET",
+      "path": "/products/search",
+      "tags": [
+        "Product"
+      ],
+      "security": [],
+      "params": [
+        "query:q",
+        "query:page"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "getProductSpecs",
+      "method": "GET",
+      "path": "/products/{productId}/specs",
+      "tags": [
+        "Product Spec"
+      ],
+      "security": [],
+      "params": [
+        "path:productId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200"
+      ]
+    },
+    {
+      "id": "storeProductSpec",
+      "method": "POST",
+      "path": "/products/{productId}/specs",
+      "tags": [
+        "Product Spec"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:productId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "201",
+        "401",
+        "422"
+      ]
+    },
+    {
+      "id": "getProductSpec",
+      "method": "GET",
+      "path": "/products/{productId}/specs/{specId}",
+      "tags": [
+        "Product Spec"
+      ],
+      "security": [],
+      "params": [
+        "path:productId",
+        "path:specId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200"
+      ]
+    },
+    {
+      "id": "updateProductSpec",
+      "method": "PUT",
+      "path": "/products/{productId}/specs/{specId}",
+      "tags": [
+        "Product Spec"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:productId",
+        "path:specId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "401"
+      ]
+    },
+    {
+      "id": "deleteProductSpec",
+      "method": "DELETE",
+      "path": "/products/{productId}/specs/{specId}",
+      "tags": [
+        "Product Spec"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:productId",
+        "path:specId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "204",
+        "401"
+      ]
+    },
+    {
+      "id": "getSpecNames",
+      "method": "GET",
+      "path": "/product-specs/names",
+      "tags": [
+        "Product Spec"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200"
+      ]
+    },
+    {
+      "id": "getTotalSalesPerCountry",
+      "method": "GET",
+      "path": "/reports/total-sales-per-country",
+      "tags": [
+        "Report"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404"
+      ]
+    },
+    {
+      "id": "getTopPurchasedProducts",
+      "method": "GET",
+      "path": "/reports/top10-purchased-products",
+      "tags": [
+        "Report"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404"
+      ]
+    },
+    {
+      "id": "getBestSellingCategories",
+      "method": "GET",
+      "path": "/reports/top10-best-selling-categories",
+      "tags": [
+        "Report"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404"
+      ]
+    },
+    {
+      "id": "getTotalSalesOfYears",
+      "method": "GET",
+      "path": "/reports/total-sales-of-years",
+      "tags": [
+        "Report"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "query:years"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404"
+      ]
+    },
+    {
+      "id": "getAverageSalesPerMonth",
+      "method": "GET",
+      "path": "/reports/average-sales-per-month",
+      "tags": [
+        "Report"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "query:year"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404"
+      ]
+    },
+    {
+      "id": "getAverageSalesPerWeek",
+      "method": "GET",
+      "path": "/reports/average-sales-per-week",
+      "tags": [
+        "Report"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "query:year"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404"
+      ]
+    },
+    {
+      "id": "getCustomersByCountry",
+      "method": "GET",
+      "path": "/reports/customers-by-country",
+      "tags": [
+        "Report"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404"
+      ]
+    },
+    {
+      "id": "salesStream",
+      "method": "GET",
+      "path": "/sales-stream",
+      "tags": [
+        "Stream"
+      ],
+      "security": [],
+      "params": [
+        "query:limit",
+        "query:interval",
+        "query:seed"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200"
+      ]
+    },
+    {
+      "id": "setupTotp",
+      "method": "POST",
+      "path": "/totp/setup",
+      "tags": [
+        "TOTP"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400"
+      ]
+    },
+    {
+      "id": "verifyTotp",
+      "method": "POST",
+      "path": "/totp/verify",
+      "tags": [
+        "TOTP"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "400"
+      ]
+    },
+    {
+      "id": "getUsers",
+      "method": "GET",
+      "path": "/users",
+      "tags": [
+        "User"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "query:page"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "401"
+      ]
+    },
+    {
+      "id": "storeUser",
+      "method": "POST",
+      "path": "/users/register",
+      "tags": [
+        "User"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "201",
+        "400",
+        "401",
+        "403",
+        "409"
+      ]
+    },
+    {
+      "id": "login-customer",
+      "method": "POST",
+      "path": "/users/login",
+      "tags": [
+        "User"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200"
+      ]
+    },
+    {
+      "id": "forgotPassword",
+      "method": "POST",
+      "path": "/users/forgot-password",
+      "tags": [
+        "User"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "400",
+        "401",
+        "403"
+      ]
+    },
+    {
+      "id": "changePassword",
+      "method": "POST",
+      "path": "/users/change-password",
+      "tags": [
+        "User"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "401"
+      ]
+    },
+    {
+      "id": "get-current-customer-info",
+      "method": "GET",
+      "path": "/users/me",
+      "tags": [
+        "User"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401"
+      ]
+    },
+    {
+      "id": "logOut",
+      "method": "GET",
+      "path": "/users/logout",
+      "tags": [
+        "User"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "401"
+      ]
+    },
+    {
+      "id": "refreshToken",
+      "method": "GET",
+      "path": "/users/refresh",
+      "tags": [
+        "User"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "401"
+      ]
+    },
+    {
+      "id": "getUser",
+      "method": "GET",
+      "path": "/users/{userId}",
+      "tags": [
+        "User"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:userId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404",
+        "405"
+      ]
+    },
+    {
+      "id": "updateUser",
+      "method": "PUT",
+      "path": "/users/{userId}",
+      "tags": [
+        "User"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:userId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "401",
+        "403",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "deleteUser",
+      "method": "DELETE",
+      "path": "/users/{userId}",
+      "tags": [
+        "User"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:userId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "204",
+        "401",
+        "403",
+        "404",
+        "405",
+        "409"
+      ]
+    },
+    {
+      "id": "patchUser",
+      "method": "PATCH",
+      "path": "/users/{userId}",
+      "tags": [
+        "User"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "path:userId"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "401",
+        "403",
+        "405",
+        "409",
+        "422"
+      ]
+    },
+    {
+      "id": "searchUser",
+      "method": "GET",
+      "path": "/users/search",
+      "tags": [
+        "User"
+      ],
+      "security": [
+        "apiAuth"
+      ],
+      "params": [
+        "query:q",
+        "query:page"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "401",
+        "404"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "storeBrand",
+      "to": "getBrand",
+      "via": "brandId"
+    },
+    {
+      "from": "storeBrand",
+      "to": "updateBrand",
+      "via": "brandId"
+    },
+    {
+      "from": "storeBrand",
+      "to": "deleteBrand",
+      "via": "brandId"
+    },
+    {
+      "from": "storeBrand",
+      "to": "patchBrand",
+      "via": "brandId"
+    },
+    {
+      "from": "createCart",
+      "to": "addItem",
+      "via": "id"
+    },
+    {
+      "from": "createCart",
+      "to": "getCart",
+      "via": "cartId"
+    },
+    {
+      "from": "createCart",
+      "to": "deleteCart",
+      "via": "cartId"
+    },
+    {
+      "from": "createCart",
+      "to": "updateCartQuantity",
+      "via": "cartId"
+    },
+    {
+      "from": "createCart",
+      "to": "deleteProductFromCart",
+      "via": "cartId"
+    },
+    {
+      "from": "storeCategory",
+      "to": "getCategory",
+      "via": "categoryId"
+    },
+    {
+      "from": "storeCategory",
+      "to": "updateCategory",
+      "via": "categoryId"
+    },
+    {
+      "from": "storeCategory",
+      "to": "deleteCategory",
+      "via": "categoryId"
+    },
+    {
+      "from": "storeCategory",
+      "to": "patchCategory",
+      "via": "categoryId"
+    },
+    {
+      "from": "sendMessage",
+      "to": "attachFile",
+      "via": "messageId"
+    },
+    {
+      "from": "sendMessage",
+      "to": "getMessage",
+      "via": "messageId"
+    },
+    {
+      "from": "sendMessage",
+      "to": "replyToMessage",
+      "via": "messageId"
+    },
+    {
+      "from": "sendMessage",
+      "to": "updateMessageStatus",
+      "via": "messageId"
+    },
+    {
+      "from": "storeFavorite",
+      "to": "getFavorite",
+      "via": "favoriteId"
+    },
+    {
+      "from": "storeFavorite",
+      "to": "deleteFavorite",
+      "via": "favoriteId"
+    },
+    {
+      "from": "storeInvoice",
+      "to": "getInvoice",
+      "via": "invoiceId"
+    },
+    {
+      "from": "storeGuestInvoice",
+      "to": "getInvoice",
+      "via": "invoiceId"
+    },
+    {
+      "from": "storeInvoice",
+      "to": "updateInvoice",
+      "via": "invoiceId"
+    },
+    {
+      "from": "storeGuestInvoice",
+      "to": "updateInvoice",
+      "via": "invoiceId"
+    },
+    {
+      "from": "storeInvoice",
+      "to": "patchInvoice",
+      "via": "invoiceId"
+    },
+    {
+      "from": "storeGuestInvoice",
+      "to": "patchInvoice",
+      "via": "invoiceId"
+    },
+    {
+      "from": "storeInvoice",
+      "to": "downloadPDF",
+      "via": "invoice_number"
+    },
+    {
+      "from": "storeGuestInvoice",
+      "to": "downloadPDF",
+      "via": "invoice_number"
+    },
+    {
+      "from": "storeInvoice",
+      "to": "downloadPDFStatus",
+      "via": "invoice_number"
+    },
+    {
+      "from": "storeGuestInvoice",
+      "to": "downloadPDFStatus",
+      "via": "invoice_number"
+    },
+    {
+      "from": "storeInvoice",
+      "to": "updateInvoiceStatus",
+      "via": "invoiceId"
+    },
+    {
+      "from": "storeGuestInvoice",
+      "to": "updateInvoiceStatus",
+      "via": "invoiceId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "getProduct",
+      "via": "productId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "updateProduct",
+      "via": "productId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "deleteProduct",
+      "via": "productId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "patchProduct",
+      "via": "productId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "getRelatedProducts",
+      "via": "productId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "getProductSpecs",
+      "via": "productId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "storeProductSpec",
+      "via": "productId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "getProductSpec",
+      "via": "productId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "getProductSpec",
+      "via": "specId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "updateProductSpec",
+      "via": "productId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "updateProductSpec",
+      "via": "specId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "deleteProductSpec",
+      "via": "productId"
+    },
+    {
+      "from": "storeProduct",
+      "to": "deleteProductSpec",
+      "via": "specId"
+    },
+    {
+      "from": "storeUser",
+      "to": "getUser",
+      "via": "userId"
+    },
+    {
+      "from": "login-customer",
+      "to": "getUser",
+      "via": "userId"
+    },
+    {
+      "from": "forgotPassword",
+      "to": "getUser",
+      "via": "userId"
+    },
+    {
+      "from": "changePassword",
+      "to": "getUser",
+      "via": "userId"
+    },
+    {
+      "from": "storeUser",
+      "to": "updateUser",
+      "via": "userId"
+    },
+    {
+      "from": "login-customer",
+      "to": "updateUser",
+      "via": "userId"
+    },
+    {
+      "from": "forgotPassword",
+      "to": "updateUser",
+      "via": "userId"
+    },
+    {
+      "from": "changePassword",
+      "to": "updateUser",
+      "via": "userId"
+    },
+    {
+      "from": "storeUser",
+      "to": "deleteUser",
+      "via": "userId"
+    },
+    {
+      "from": "login-customer",
+      "to": "deleteUser",
+      "via": "userId"
+    },
+    {
+      "from": "forgotPassword",
+      "to": "deleteUser",
+      "via": "userId"
+    },
+    {
+      "from": "changePassword",
+      "to": "deleteUser",
+      "via": "userId"
+    },
+    {
+      "from": "storeUser",
+      "to": "patchUser",
+      "via": "userId"
+    },
+    {
+      "from": "login-customer",
+      "to": "patchUser",
+      "via": "userId"
+    },
+    {
+      "from": "forgotPassword",
+      "to": "patchUser",
+      "via": "userId"
+    },
+    {
+      "from": "changePassword",
+      "to": "patchUser",
+      "via": "userId"
+    },
+    {
+      "from": "login-customer",
+      "to": "storeInvoice",
+      "via": "bearer token"
+    },
+    {
+      "from": "login-customer",
+      "to": "get-current-customer-info",
+      "via": "bearer token"
+    },
+    {
+      "from": "storeUser",
+      "to": "login-customer",
+      "via": "email + password"
+    },
+    {
+      "from": "getProducts",
+      "to": "addItem",
+      "via": "body.product_id"
+    },
+    {
+      "from": "createCart",
+      "to": "storeInvoice",
+      "via": "body.cart_id"
+    },
+    {
+      "from": "postcodeLookup",
+      "to": "storeInvoice",
+      "via": "billing city/state must match postcode"
+    },
+    {
+      "from": "storeInvoice",
+      "to": "getInvoices",
+      "via": "listed for owner"
+    }
+  ]
+}

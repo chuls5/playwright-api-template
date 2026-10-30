@@ -1,0 +1,123 @@
+{
+  "target": "mock-bank",
+  "generatedBy": "hand-written (no OpenAPI for the mock)",
+  "ops": [
+    {
+      "id": "service-token",
+      "method": "POST",
+      "path": "/auth/service-token"
+    },
+    {
+      "id": "user-step-up",
+      "method": "POST",
+      "path": "/auth/login → challenges → otp → token"
+    },
+    {
+      "id": "bankingApplications",
+      "method": "POST",
+      "path": "/applications"
+    },
+    {
+      "id": "GetNextBusinessDay.v1",
+      "method": "POST",
+      "path": "/api/functions/GetNextBusinessDay.v1"
+    },
+    {
+      "id": "ReadCustomer.v1",
+      "method": "POST",
+      "path": "/api/functions/ReadCustomer.v1"
+    },
+    {
+      "id": "ReadTransactionLimits.v2",
+      "method": "POST",
+      "path": "/api/functions/ReadTransactionLimits.v2"
+    },
+    {
+      "id": "ReadTransactionLimits.v1",
+      "method": "POST",
+      "path": "/api/functions/ReadTransactionLimits.v1"
+    },
+    {
+      "id": "ReadAccounts.v1",
+      "method": "POST",
+      "path": "/api/functions/ReadAccounts.v1"
+    },
+    {
+      "id": "ReadStatement.v1",
+      "method": "POST",
+      "path": "/api/functions/ReadStatement.v1"
+    },
+    {
+      "id": "CreatePayee.v1",
+      "method": "POST",
+      "path": "/api/functions/CreatePayee.v1"
+    },
+    {
+      "id": "CreateTransfer.v1",
+      "method": "POST",
+      "path": "/api/functions/CreateTransfer.v1"
+    },
+    {
+      "id": "CreateScheduledTransfer.v1",
+      "method": "POST",
+      "path": "/api/functions/CreateScheduledTransfer.v1"
+    },
+    {
+      "id": "CreateAccountHold.v1",
+      "method": "POST",
+      "path": "/api/functions/CreateAccountHold.v1"
+    },
+    {
+      "id": "ReadAccountHolds.v1",
+      "method": "POST",
+      "path": "/api/functions/ReadAccountHolds.v1"
+    },
+    {
+      "id": "DeleteAccountHold.v1",
+      "method": "POST",
+      "path": "/api/functions/DeleteAccountHold.v1"
+    }
+  ],
+  "edges": [
+    {
+      "from": "bankingApplications",
+      "to": "user-step-up",
+      "via": "userId"
+    },
+    {
+      "from": "bankingApplications",
+      "to": "ReadAccounts.v1",
+      "via": "customer"
+    },
+    {
+      "from": "ReadTransactionLimits.v1",
+      "to": "CreateTransfer.v1",
+      "via": "remaining limit"
+    },
+    {
+      "from": "ReadAccounts.v1",
+      "to": "CreateTransfer.v1",
+      "via": "accountId"
+    },
+    {
+      "from": "GetNextBusinessDay.v1",
+      "to": "CreateScheduledTransfer.v1",
+      "via": "executionDate"
+    },
+    {
+      "from": "CreateAccountHold.v1",
+      "to": "ReadAccountHolds.v1",
+      "via": "accountId"
+    },
+    {
+      "from": "CreateAccountHold.v1",
+      "to": "DeleteAccountHold.v1",
+      "via": "restrictionId"
+    },
+    {
+      "from": "user-step-up",
+      "to": "CreateTransfer.v1",
+      "via": "elevated session token"
+    }
+  ]
+}

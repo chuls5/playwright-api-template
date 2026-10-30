@@ -1,0 +1,12 @@
+import { expectSchema, expectStatus } from '../../../../src';
+import { expect, test } from '../../fixtures';
+import { __Schema__ } from '../../schemas';
+
+test.describe('__opId__', { tag: ['@L1', '@api:__opId__'] }, () => {
+  test('__METHOD__ __path__ with valid input → __2xx__', { tag: '@smoke' }, async ({ __client__, __factory__ }) => {
+    const input = await __factory__();
+    const res = await __client__.__opId__(input);
+    expectStatus(res, __2xx__);
+    expect(expectSchema(res, __Schema__)).toMatchObject({ /* fields that must round-trip */ });
+  });
+});

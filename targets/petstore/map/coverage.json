@@ -1,0 +1,216 @@
+{
+  "target": "petstore",
+  "ops": 19,
+  "coveredL1plus": 8,
+  "rows": [
+    {
+      "op": "updatePet",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "addPet",
+      "levels": [
+        0,
+        1,
+        2,
+        0,
+        0
+      ],
+      "max": 2
+    },
+    {
+      "op": "findPetsByStatus",
+      "levels": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "max": 2
+    },
+    {
+      "op": "findPetsByTags",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getPetById",
+      "levels": [
+        0,
+        1,
+        2,
+        0,
+        0
+      ],
+      "max": 2
+    },
+    {
+      "op": "updatePetWithForm",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "deletePet",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "uploadFile",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getInventory",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "placeOrder",
+      "levels": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "max": 2
+    },
+    {
+      "op": "getOrderById",
+      "levels": [
+        0,
+        1,
+        2,
+        0,
+        0
+      ],
+      "max": 2
+    },
+    {
+      "op": "deleteOrder",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "createUser",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "createUsersWithListInput",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "loginUser",
+      "levels": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": 0
+    },
+    {
+      "op": "logoutUser",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "getUserByName",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "updateUser",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "deleteUser",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    }
+  ]
+}

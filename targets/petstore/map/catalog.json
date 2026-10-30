@@ -1,0 +1,427 @@
+{
+  "target": "petstore",
+  "generatedBy": "tools/discover.ts",
+  "ops": [
+    {
+      "id": "updatePet",
+      "method": "PUT",
+      "path": "/pet",
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "400",
+        "404",
+        "422",
+        "default"
+      ]
+    },
+    {
+      "id": "addPet",
+      "method": "POST",
+      "path": "/pet",
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "400",
+        "422",
+        "default"
+      ]
+    },
+    {
+      "id": "findPetsByStatus",
+      "method": "GET",
+      "path": "/pet/findByStatus",
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "params": [
+        "query:status"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "default"
+      ]
+    },
+    {
+      "id": "findPetsByTags",
+      "method": "GET",
+      "path": "/pet/findByTags",
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "params": [
+        "query:tags"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "default"
+      ]
+    },
+    {
+      "id": "getPetById",
+      "method": "GET",
+      "path": "/pet/{petId}",
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "api_key",
+        "petstore_auth"
+      ],
+      "params": [
+        "path:petId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "404",
+        "default"
+      ]
+    },
+    {
+      "id": "updatePetWithForm",
+      "method": "POST",
+      "path": "/pet/{petId}",
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "params": [
+        "path:petId",
+        "query:name",
+        "query:status"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "default"
+      ]
+    },
+    {
+      "id": "deletePet",
+      "method": "DELETE",
+      "path": "/pet/{petId}",
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "params": [
+        "header:api_key",
+        "path:petId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "default"
+      ]
+    },
+    {
+      "id": "uploadFile",
+      "method": "POST",
+      "path": "/pet/{petId}/uploadImage",
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "params": [
+        "path:petId",
+        "query:additionalMetadata"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "400",
+        "404",
+        "default"
+      ]
+    },
+    {
+      "id": "getInventory",
+      "method": "GET",
+      "path": "/store/inventory",
+      "tags": [
+        "store"
+      ],
+      "security": [
+        "api_key"
+      ],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "default"
+      ]
+    },
+    {
+      "id": "placeOrder",
+      "method": "POST",
+      "path": "/store/order",
+      "tags": [
+        "store"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "400",
+        "422",
+        "default"
+      ]
+    },
+    {
+      "id": "getOrderById",
+      "method": "GET",
+      "path": "/store/order/{orderId}",
+      "tags": [
+        "store"
+      ],
+      "security": [],
+      "params": [
+        "path:orderId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "404",
+        "default"
+      ]
+    },
+    {
+      "id": "deleteOrder",
+      "method": "DELETE",
+      "path": "/store/order/{orderId}",
+      "tags": [
+        "store"
+      ],
+      "security": [],
+      "params": [
+        "path:orderId"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "404",
+        "default"
+      ]
+    },
+    {
+      "id": "createUser",
+      "method": "POST",
+      "path": "/user",
+      "tags": [
+        "user"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "default"
+      ]
+    },
+    {
+      "id": "createUsersWithListInput",
+      "method": "POST",
+      "path": "/user/createWithList",
+      "tags": [
+        "user"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "default"
+      ]
+    },
+    {
+      "id": "loginUser",
+      "method": "GET",
+      "path": "/user/login",
+      "tags": [
+        "user"
+      ],
+      "security": [],
+      "params": [
+        "query:username",
+        "query:password"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "default"
+      ]
+    },
+    {
+      "id": "logoutUser",
+      "method": "GET",
+      "path": "/user/logout",
+      "tags": [
+        "user"
+      ],
+      "security": [],
+      "params": [],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "default"
+      ]
+    },
+    {
+      "id": "getUserByName",
+      "method": "GET",
+      "path": "/user/{username}",
+      "tags": [
+        "user"
+      ],
+      "security": [],
+      "params": [
+        "path:username"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "404",
+        "default"
+      ]
+    },
+    {
+      "id": "updateUser",
+      "method": "PUT",
+      "path": "/user/{username}",
+      "tags": [
+        "user"
+      ],
+      "security": [],
+      "params": [
+        "path:username"
+      ],
+      "requestBody": true,
+      "responses": [
+        "200",
+        "400",
+        "404",
+        "default"
+      ]
+    },
+    {
+      "id": "deleteUser",
+      "method": "DELETE",
+      "path": "/user/{username}",
+      "tags": [
+        "user"
+      ],
+      "security": [],
+      "params": [
+        "path:username"
+      ],
+      "requestBody": false,
+      "responses": [
+        "200",
+        "400",
+        "404",
+        "default"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "addPet",
+      "to": "getPetById",
+      "via": "petId"
+    },
+    {
+      "from": "addPet",
+      "to": "updatePetWithForm",
+      "via": "petId"
+    },
+    {
+      "from": "addPet",
+      "to": "deletePet",
+      "via": "petId"
+    },
+    {
+      "from": "addPet",
+      "to": "uploadFile",
+      "via": "petId"
+    },
+    {
+      "from": "placeOrder",
+      "to": "getOrderById",
+      "via": "orderId"
+    },
+    {
+      "from": "placeOrder",
+      "to": "deleteOrder",
+      "via": "orderId"
+    },
+    {
+      "from": "createUser",
+      "to": "getUserByName",
+      "via": "username"
+    },
+    {
+      "from": "createUsersWithListInput",
+      "to": "getUserByName",
+      "via": "username"
+    },
+    {
+      "from": "createUser",
+      "to": "updateUser",
+      "via": "username"
+    },
+    {
+      "from": "createUsersWithListInput",
+      "to": "updateUser",
+      "via": "username"
+    },
+    {
+      "from": "createUser",
+      "to": "deleteUser",
+      "via": "username"
+    },
+    {
+      "from": "createUsersWithListInput",
+      "to": "deleteUser",
+      "via": "username"
+    }
+  ]
+}

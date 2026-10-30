@@ -1,0 +1,11 @@
+node_modules
+playwright-report
+allure-results
+allure-report
+test-results
+ledger
+targets/*/spec/*.json
+package-lock.json
+targets/*/map/coverage.*
+targets/*/map/catalog.json
+targets/*/map/graph.md

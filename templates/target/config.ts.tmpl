@@ -1,0 +1,10 @@
+import { z } from 'zod';
+import { loadEnv, readEnv } from '../../src';
+
+loadEnv();
+/** Every value from env. No defaults for anything secret. */
+export const cfg = readEnv({
+  __T___BASE_URL: z.string().url(),
+  __T___CLIENT_ID: z.string(),
+  __T___CLIENT_SECRET: z.string(),
+});

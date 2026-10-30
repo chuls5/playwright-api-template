@@ -1,0 +1,45 @@
+{
+  "name": "playwright-api-template",
+  "version": "0.1.0",
+  "description": "Agent-driven Playwright TypeScript API testing framework (target-agnostic).",
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:petstore": "playwright test --project=petstore",
+    "test:toolshop": "playwright test --project=toolshop",
+    "test:countries": "playwright test --project=countries",
+    "test:mock": "playwright test --project=mock-bank",
+    "mock": "node mock/bank/server.ts",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -p .",
+    "check": "npm run lint && npm run typecheck",
+    "allure:generate": "node tools/allure-meta.ts && rm -rf allure-report && allure generate allure-results -o allure-report",
+    "allure:open": "allure open allure-report",
+    "discover": "node tools/discover.ts",
+    "coverage": "node tools/coverage.ts",
+    "hooks:install": "git config core.hooksPath .githooks && git config commit.template .gitmessage"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.6",
+    "allure": "^3.22.1",
+    "allure-playwright": "^3.14.0",
+    "dotenv": "^18.0.9",
+    "eslint": "^10.13.0",
+    "eslint-plugin-playwright": "^2.12.1",
+    "prettier": "^3.9.10",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20.6"
+  },
+  "license": "UNLICENSED"
+}

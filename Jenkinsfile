@@ -1,0 +1,38 @@
+// Primary CI. Assumes a Node 22 agent label and Jenkins credentials named below (IDs are placeholders).
+pipeline {
+  agent { label 'node22' }
+  options { timeout(time: 90, unit: 'MINUTES'); timestamps(); disableConcurrentBuilds() }
+  parameters {
+    choice(name: 'SUITE', choices: ['smoke', 'regression'], description: 'smoke = @smoke; regression = everything')
+    string(name: 'PROJECTS', defaultValue: '', description: 'Comma-separated Playwright projects; empty = all')
+    choice(name: 'TEST_ENV', choices: ['local', 'e1', 'e2'], description: 'Loads .env.<TEST_ENV> keys from credentials')
+  }
+  triggers { cron(env.BRANCH_NAME == 'develop' ? 'H 9 * * *' : '') }
+  environment {
+    CI = 'true'
+    TEST_ENV = "${params.TEST_ENV}"
+    RUN_ID = "${env.BUILD_TAG}"
+  }
+  stages {
+    stage('Install') { steps { sh 'npm ci' } }
+    stage('Lint & typecheck') { steps { sh 'npm run lint && npm run typecheck' } }
+    stage('Test') {
+      steps {
+        // Example for a real target: withCredentials([string(credentialsId: 'MY_TARGET_SECRET', variable: 'MY_TARGET_SECRET')]) { ... }
+        script {
+          def grep = params.SUITE == 'smoke' ? '--grep @smoke' : ''
+          def projects = params.PROJECTS?.trim() ? params.PROJECTS.split(',').collect { "--project=${it.trim()}" }.join(' ') : ''
+          sh "npx playwright test ${grep} ${projects}"
+        }
+      }
+    }
+  }
+  post {
+    always {
+      junit allowEmptyResults: true, testResults: 'test-results/junit.xml'
+      sh 'node tools/allure-meta.ts && npx allure generate allure-results -o allure-report || true'
+      archiveArtifacts artifacts: 'allure-report/**, playwright-report/**, ledger/**', allowEmptyArchive: true
+      // If the Allure Jenkins plugin is installed, replace the two lines above with: allure results: [[path: 'allure-results']]
+    }
+  }
+}

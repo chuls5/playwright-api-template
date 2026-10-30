@@ -1,0 +1,17 @@
+import { expectStatus } from '../../../../src';
+import { expect, test } from '../../fixtures';
+
+const cases: [title: string, input: unknown, status: number, message: RegExp][] = [
+  ['missing __field__', { /* ... */ }, 400, /__field__/],
+  ['__field__ wrong type', { /* ... */ }, 400, /__field__/],
+];
+
+test.describe('__opId__ validation', { tag: ['@L2', '@api:__opId__', '@pattern:validation'] }, () => {
+  for (const [title, input, status, message] of cases) {
+    test(`__METHOD__ __path__ ${title} → ${status}`, async ({ __client__ }) => {
+      const res = await __client__.raw().post('__path__', { data: input });
+      expectStatus(res, status);
+      expect(res.text).toMatch(message);
+    });
+  }
+});

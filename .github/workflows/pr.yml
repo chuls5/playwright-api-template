@@ -1,0 +1,33 @@
+# Secondary CI (Jenkins is primary). Configured, not yet exercised on a real remote.
+name: pr
+on:
+  pull_request:
+    branches: [develop, main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npx playwright test --grep @smoke
+        env: { CI: 'true' }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: results
+          path: |
+            allure-results/
+            test-results/
+            playwright-report/
+  main-only-from-develop:
+    if: github.base_ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          case "${{ github.head_ref }}" in develop|release/*|hotfix/*) exit 0;; esac
+          echo "main accepts PRs only from develop, release/* or hotfix/*"; exit 1

@@ -1,0 +1,172 @@
+{
+  "target": "mock-bank",
+  "ops": 15,
+  "coveredL1plus": 11,
+  "rows": [
+    {
+      "op": "service-token",
+      "levels": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": 0
+    },
+    {
+      "op": "user-step-up",
+      "levels": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": 0
+    },
+    {
+      "op": "bankingApplications",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "GetNextBusinessDay.v1",
+      "levels": [
+        0,
+        1,
+        2,
+        0,
+        0
+      ],
+      "max": 2
+    },
+    {
+      "op": "ReadCustomer.v1",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "ReadTransactionLimits.v2",
+      "levels": [
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "ReadTransactionLimits.v1",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "ReadAccounts.v1",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "ReadStatement.v1",
+      "levels": [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "max": 2
+    },
+    {
+      "op": "CreatePayee.v1",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "CreateTransfer.v1",
+      "levels": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max": -1
+    },
+    {
+      "op": "CreateScheduledTransfer.v1",
+      "levels": [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "max": 2
+    },
+    {
+      "op": "CreateAccountHold.v1",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "ReadAccountHolds.v1",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    },
+    {
+      "op": "DeleteAccountHold.v1",
+      "levels": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "max": 1
+    }
+  ]
+}

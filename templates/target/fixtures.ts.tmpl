@@ -1,0 +1,7 @@
+import { ApiClient, test as base } from '../../src';
+import { __Client__ } from './client';
+
+export const test = base.extend<{ api: __Client__ }>({
+  api: async ({ request }, use) => use(new __Client__(new ApiClient(request, { auth: /* strategy */ undefined }))),
+});
+export { expect } from '../../src';

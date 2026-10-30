@@ -1,0 +1,12 @@
+{
+  "add": [
+    { "from": "login-customer", "to": "storeInvoice", "via": "bearer token" },
+    { "from": "login-customer", "to": "get-current-customer-info", "via": "bearer token" },
+    { "from": "storeUser", "to": "login-customer", "via": "email + password" },
+    { "from": "getProducts", "to": "addItem", "via": "body.product_id" },
+    { "from": "createCart", "to": "storeInvoice", "via": "body.cart_id" },
+    { "from": "postcodeLookup", "to": "storeInvoice", "via": "billing city/state must match postcode" },
+    { "from": "storeInvoice", "to": "getInvoices", "via": "listed for owner" }
+  ],
+  "drop": []
+}

@@ -1,0 +1,14 @@
+import { expectSchema, expectStatus } from '../../../../src';
+import { expect, test } from '../../fixtures';
+import { __Schema__ } from '../../schemas';
+
+const FN = '__Function.v1__' as const;
+
+test.describe(FN, { tag: ['@L1', `@api:${FN}`] }, () => {
+  test(`${FN} for own customer → 200`, async ({ newCustomer, fnAsUser }) => {
+    const c = await newCustomer();
+    const res = await fnAsUser(c.userFor('PRIMARY')).call(FN, { /* body */ });
+    expectStatus(res, 200);
+    expect(expectSchema(res, __Schema__)).toBeTruthy();
+  });
+});
