@@ -8,7 +8,7 @@ A starting template for API test suites in Playwright + TypeScript. A reusable c
 - **Clients:** `ApiClient` (redacted Allure attachments, correlation ids) and `FunctionClient` (versioned function-style operations).
 - **Patterns, with examples on the mock:** authz role matrix, idempotency-key replay rules, limits read-then-size, business-day helper, fault injection, and cleanup + ledger fixtures.
 - **Levels:** L0 auth → L1 endpoint → L2 pattern/negative → L3 chain → L4 journey, encoded in file names and tags.
-- **Reporting and CI:** Allure 3 with categories (environment vs test vs product defect), JUnit, a Jenkinsfile and GitHub Actions workflows.
+- **Reporting and CI:** Allure 3 with categories (environment vs test vs product defect), JUnit, and GitHub Actions as the CI (PR gate, nightly with the Allure report on Pages, a reusable workflow).
 
 ## Quick start
 
@@ -26,16 +26,16 @@ Requires Node ≥ 20.6 (runs `.ts` via Node type stripping; tested on Node 24). 
 
 ## Layout
 
-| Path                                | What                                                                          |
-| ----------------------------------- | ----------------------------------------------------------------------------- |
-| `src/`                              | auth strategies, clients, assertions, data, fixtures, redaction               |
-| `targets/`                          | `mock-bank`, `petstore`, `toolshop` (L3/L4), `countries` (GraphQL)            |
-| `mock/bank/`                        | local banking function-API mock server (Node built-ins only)                  |
-| `templates/`                        | spec templates + a new-target skeleton                                        |
-| `tools/`                            | discovery, coverage, lint rules                                               |
-| `docs/`                             | standards, coverage model, CI, workflows, cookbooks, runbooks, open questions |
-| `.claude/`                          | agents + skills; see `CLAUDE.md`, `AGENTS.md`                                 |
-| `Jenkinsfile`, `.github/workflows/` | CI                                                                            |
+| Path                               | What                                                                          |
+| ---------------------------------- | ----------------------------------------------------------------------------- |
+| `src/`                             | auth strategies, clients, assertions, data, fixtures, redaction               |
+| `targets/`                         | `mock-bank`, `petstore`, `toolshop` (L3/L4), `countries` (GraphQL)            |
+| `mock/bank/`                       | local banking function-API mock server (Node built-ins only)                  |
+| `templates/`                       | spec templates + a new-target skeleton                                        |
+| `tools/`                           | discovery, coverage, lint rules                                               |
+| `docs/`                            | standards, coverage model, CI, workflows, cookbooks, runbooks, open questions |
+| `.claude/`                         | agents + skills; see `CLAUDE.md`, `AGENTS.md`                                 |
+| `.github/workflows/`, `docs/ci.md` | CI                                                                            |
 
 ## Add a target
 

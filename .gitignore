@@ -10,3 +10,4 @@ playwright-report/
 ledger/
 *.log
 .DS_Store
+allure-history/
