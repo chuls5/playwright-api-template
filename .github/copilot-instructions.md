@@ -7,3 +7,4 @@ Playwright + TypeScript API tests. Full rules: `CLAUDE.md`, `docs/standards.md`.
 - Use `expectStatus` + `expectSchema`; check side effects of writes.
 - Test data from fixtures (`rng`, `newPet`, `newCustomer`) with `cleanup`; never literals for passwords, secrets, OTPs, SSNs.
 - Nothing target-specific in `src/`.
+- CI is GitHub Actions (`.github/workflows/`, `docs/ci.md`); the required PR check is `gate`. Jenkins is legacy reference only.

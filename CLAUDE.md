@@ -17,3 +17,5 @@ Playwright TS API test framework. Read `README.md` for layout; `STATUS.md` for s
 ## Agents & skills
 
 Agents in `.claude/agents/` (cartographer → planner → writer → reviewer; triager on red). Skills in `.claude/skills/`. Workflows W1–W5 in `docs/workflows/`; pattern cookbooks in `docs/cookbooks/`.
+
+- CI is GitHub Actions (`.github/workflows/`, `docs/ci.md`); the required PR check is `gate`. Jenkins is legacy reference only.

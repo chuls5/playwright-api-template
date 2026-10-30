@@ -13,7 +13,7 @@
 - No L3/L4 on petstore or mock-bank; `countries` has no map/coverage (no OpenAPI).
 - No token persistence to `.auth/` (mock tokens die with the per-run mock; it would also put bearer tokens on disk).
 - Playwright `retries: 1` on CI; flaky results show as `flaky` in Allure. Set `0` for strict no-retry.
-- GitHub Actions workflows and the Jenkinsfile are validated but not run in this repo.
+- CI is GitHub Actions (`docs/ci.md`): PR gate, nightly regression with the Allure report on GitHub Pages, reusable `api-tests.yml`. Jenkinsfile kept as legacy reference.
 - Mock behaviour (incl. POWER_OF_ATTORNEY = read-only) is a design assumption, not any real platform's behaviour.
 
 ## Counts
